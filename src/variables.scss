@@ -1,0 +1,14 @@
+@import '~@angular/material/theming';
+
+$app-primary: mat-palette($mat-blue, 500);
+$app-accent: mat-palette($mat-orange);
+$app-warn: mat-palette($mat-red);
+
+$primary: mat-color($app-primary);
+$accent: mat-color($app-accent);
+$warn: mat-color($app-warn);
+
+$text-color: white;
+
+$content-padding: 10px;
+$full-height: calc(100vh - 64px);

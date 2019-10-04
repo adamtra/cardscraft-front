@@ -1,1 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
+@import "material-theme";
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.error-bg {
+    background-color: $warn!important;
+    color: white!important;
+}
+
+.primary-bg {
+  background-color: $primary!important;
+  color: $text-color!important;
+}
