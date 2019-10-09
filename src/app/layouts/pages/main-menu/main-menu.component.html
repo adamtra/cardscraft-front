@@ -1,0 +1,14 @@
+<div class="container h-100">
+    <div class="row h-100 justify-content-center align-items-center">
+        <mat-card class="col-12">
+            <mat-card
+                (mouseover)="hovered = i"
+                (mouseout)="hovered = -1"
+                [ngStyle]="hovered === i ? hoveredStyle() : normalStyle()"
+                *ngFor="let option of menuOptions; let i = index"
+                class="my-2 text-center pointer ">
+                <span class="menu-option">{{option.name}}</span>
+            </mat-card>
+        </mat-card>
+    </div>
+</div>

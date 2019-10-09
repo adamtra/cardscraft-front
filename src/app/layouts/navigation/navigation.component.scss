@@ -1,10 +1,65 @@
+@import '../../../variables';
+$animation: 0.2s ease-in-out;
+
+
+.activated {
+  background-color: darken($primary, 10%)!important;
+  color: $text-color!important;
+}
+
 .sidenav-container {
   height: 100vh;
   overflow: hidden;
+}
+
+.sidenav {
+  box-shadow: 3px 0 6px rgba(0,0,0,.24);
 }
 
 .mat-toolbar.mat-primary {
   position: sticky;
   top: 0;
   z-index: 1;
+}
+
+.theme-text {
+  font-size: 15px;
+  padding: 0px 10px 0px 10px;
+}
+
+.full-content {
+  overflow-y: auto;
+  height: $full-height;
+  padding: $content-padding;
+}
+
+.full-menu {
+  overflow-y: auto;
+  padding-top: 0;
+  height: $full-height;
+}
+
+.span-button {
+  outline: none!important;
+  cursor: pointer;
+}
+
+.sidenav-container-margin-text {
+  margin-left: 200px!important;
+  transition: margin-left $animation;
+}
+
+.sidenav-container-margin-icon {
+  margin-left: 57px!important;
+  transition: margin-left $animation;
+}
+
+.sidenav-text {
+  width: 200px;
+  transition: width $animation;
+}
+
+.sidenav-icon {
+  width: 57px;
+  transition: width $animation;
 }

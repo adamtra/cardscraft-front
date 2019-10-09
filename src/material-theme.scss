@@ -6,3 +6,36 @@ $light-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
 $dark-theme: mat-dark-theme($app-primary, $app-accent, $app-warn);
 
 @include angular-material-theme($dark-theme);
+
+.light-theme {
+  @include angular-material-theme($light-theme);
+  $background: white;
+  ::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: $background;
+  }
+
+  ::-webkit-scrollbar {
+    width: 12px;
+    background-color: $background;
+  }
+}
+
+.dark-theme {
+  @include angular-material-theme($dark-theme);
+  $background: #424242;
+  ::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: $background;
+  }
+
+  ::-webkit-scrollbar {
+    width: 12px;
+    background-color: $background;
+  }
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: $primary;
+}

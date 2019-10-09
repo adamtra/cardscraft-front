@@ -12,3 +12,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   background-color: $primary!important;
   color: $text-color!important;
 }
+
+.pointer {
+  cursor: pointer;
+}
+
+.menu-option {
+  font-weight: 400;
+  color: $text-color;
+}

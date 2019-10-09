@@ -4,11 +4,25 @@
             <span class="w-100 text-center">
                 Cardscraft
             </span>
-            <div class="full-content">
-                <main class="w-100 h-100">
-                    <router-outlet #o="outlet"></router-outlet>
-                </main>
-            </div>
+            <button class="ml-auto" mat-button [matMenuTriggerFor]="menu">
+                <mat-icon>settings</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu" class="matMenu">
+                <div mat-menu-item (click)="$event.stopPropagation();">
+                    <span class="theme-text">Ciemny</span>
+                    <mat-slide-toggle [(ngModel)]="lightTheme" (change)="onSetTheme()"></mat-slide-toggle>
+                    <span class="theme-text">Jasny</span>
+                </div>
+                <div (click)="$event.stopPropagation(); logout()" mat-menu-item>
+                    <mat-icon>power_settings_new</mat-icon>
+                    <span class="span-button">Wyloguj</span>
+                </div>
+            </mat-menu>
         </mat-toolbar>
+        <div class="full-content">
+            <main class="w-100 h-100">
+                <router-outlet #o="outlet"></router-outlet>
+            </main>
+        </div>
     </mat-sidenav-content>
 </mat-sidenav-container>
