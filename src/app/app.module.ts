@@ -10,13 +10,15 @@ import { NavigationComponent } from './layouts/navigation/navigation.component';
 import { BlankComponent } from './layouts/blank/blank.component';
 import { MaterialModule } from './material.module';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RegisterComponent } from './layouts/pages/register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
     BlankComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,6 +29,7 @@ import { FormsModule } from '@angular/forms';
     MaterialModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -16,4 +16,8 @@ export class UserService {
     return this.http.post<string>(`${environment.apiLink}${this.urlBase}/login`, data);
   }
 
+  register(data: any): Observable<string> {
+    return this.http.post<string>(`${environment.apiLink}${this.urlBase}/register`, data);
+  }
+
 }

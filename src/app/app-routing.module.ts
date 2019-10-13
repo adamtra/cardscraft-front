@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NavigationComponent } from './layouts/navigation/navigation.component';
 import { BlankComponent } from './layouts/blank/blank.component';
+import { RegisterComponent } from './layouts/pages/register/register.component';
 
 
 const routes: Routes = [
@@ -29,6 +30,10 @@ const routes: Routes = [
         loadChildren: () => import('./layouts/blank/blank.module').then(m => m.BlankModule)
       }
     ]
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
   },
   {
     path: '**',
