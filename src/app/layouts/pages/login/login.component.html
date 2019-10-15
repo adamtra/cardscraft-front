@@ -9,16 +9,21 @@
                     <mat-form-field class="w-100" appearance="outline">
                         <mat-icon matPrefix class="mr-3">account_box</mat-icon>
                         <input matInput placeholder="Email" formControlName="login" required>
+                        <mat-error *ngIf="loginControl.invalid">{{getErrorMessage(loginControl)}}</mat-error>
                     </mat-form-field>
                     <mat-form-field class="w-100" appearance="outline">
                         <mat-icon matPrefix class="mr-3">lock</mat-icon>
                         <input matInput type="password" placeholder="Hasło" formControlName="password" required>
+                        <mat-error *ngIf="passwordControl.invalid">{{getErrorMessage(passwordControl)}}</mat-error>
                     </mat-form-field>
                     <button class="w-100 my-3" mat-raised-button color="primary" [disabled]="isDisabled"
                         (click)="login()">
                         Zaloguj
                     </button>
                 </form>
+                <button class="w-100 my-3" mat-raised-button routerLink="/register">
+                    Rejestracja
+                </button>
             </mat-card>
         </div>
     </div>
