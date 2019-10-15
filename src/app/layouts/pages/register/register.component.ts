@@ -15,7 +15,6 @@ export class RegisterComponent implements OnInit {
 
   public registerForm: FormGroup;
   public loading = false;
-  public submitted = false;
 
   constructor(
     private fb: FormBuilder,
@@ -39,26 +38,56 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  // convenience getter for easy access to form fields
-  get f() { return this.registerForm.controls; }
-
   register() {
-    this.submitted = true;
-
     if (this.registerForm.invalid) {
       return;
     }
 
     this.loading = true;
-    this.user.register(this.registerForm.value).subscribe((data) => {
-      localStorage.setItem('token', data);
+    this.user.register(this.registerForm.value).subscribe(() => {
+      this.router.navigate(['/login']);
     }, () => {
       this.loading = false;
-      alert('Utworzyłeś konto.\n\n' + JSON.stringify(this.registerForm.value, null, 4));
     });
   }
 
   get isDisabled() {
     return this.registerForm.invalid || this.loading;
   }
+
+  get loginControl() {
+    return this.registerForm.get('login');
+  }
+
+  get loginError() {
+    return this.loginControl.hasError('required') ? 'Podaj login' : '';
+  }
+
+  get emailControl() {
+    return this.registerForm.get('email');
+  }
+
+  get emailError() {
+    return this.emailControl.hasError('required') ? 'Podaj adres email' : 
+      this.emailControl.hasError('email') ? 'Podaj poprawny email' : '';
+  }
+
+  get passwordControl() {
+    return this.registerForm.get('password');
+  }
+
+  get passwordError() {
+    return this.passwordControl.hasError('required') ? 'Podaj hasło' :
+      this.passwordControl.hasError('minlength') ? `Hasło musi mieć minimum ${this.passwordControl.errors.minlength.requiredLength} znaków` : '';
+  }
+
+  get confirmPasswordControl() {
+    return this.registerForm.get('confirmPassword');
+  }
+
+  get confirmPasswordError() {
+    return this.confirmPasswordControl.hasError('required') ? 'Podaj hasło' :
+      this.confirmPasswordControl.hasError('mustMatch') ? 'Hasła muszą się pokrywać' : '';
+  }
+
 }

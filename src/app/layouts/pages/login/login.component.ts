@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 
@@ -38,10 +38,6 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  getErrorMessage(control: FormControl) {
-    return control.hasError('required') ? 'Wpisz wartość' :
-      control.hasError('email') ? 'Podaj adres email' : '';
-  }
 
   get isDisabled() {
     return this.loginForm.invalid || this.loading;
@@ -51,8 +47,17 @@ export class LoginComponent implements OnInit {
     return this.loginForm.get('login');
   }
 
+  get loginError() {
+    return this.loginControl.hasError('required') ? 'Podaj adres email' :
+      this.loginControl.hasError('email') ? 'Podaj poprawny email' : '';
+  }
+
   get passwordControl() {
     return this.loginForm.get('password');
+  }
+
+  get passwordError() {
+    return this.passwordControl.hasError('required') ? 'Podaj hasło' : '';
   }
 
 }
