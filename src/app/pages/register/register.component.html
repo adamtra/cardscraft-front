@@ -28,7 +28,7 @@
                     </mat-form-field>
                     <button class="w-100 my-3" mat-raised-button color="primary" [disabled]="isDisabled"
                         (click)="register()">
-                        Zarejestruj
+                        <span [class.spinner]="loading">Zarejestruj</span>
                     </button>
                 </form>
                 <button class="w-100 my-3" mat-raised-button routerLink="/login">
