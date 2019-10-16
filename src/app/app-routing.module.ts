@@ -7,11 +7,6 @@ import { BlankComponent } from './layouts/blank/blank.component';
 const routes: Routes = [
   {
     path: '',
-    pathMatch: 'full',
-    redirectTo: 'manu',
-  },
-  {
-    path: '',
     component: NavigationComponent,
     children: [
       {
@@ -32,7 +27,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'manu'
+    redirectTo: ''
   }
 ];
 
