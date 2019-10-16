@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.fb.group({
-      login: ['', Validators.compose([
+      email: ['', Validators.compose([
         Validators.required,
         Validators.email,
       ])],
@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
   }
 
   get loginControl() {
-    return this.loginForm.get('login');
+    return this.loginForm.get('email');
   }
 
   get loginError() {

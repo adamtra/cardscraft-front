@@ -8,7 +8,7 @@
                 <form [formGroup]="registerForm">
                     <mat-form-field class="w-100" appearance="outline">
                         <mat-icon matPrefix class="mr-3">account_box</mat-icon>
-                        <input matInput placeholder="Login" formControlName="login" required>
+                        <input matInput placeholder="Login" formControlName="username" required>
                         <mat-error *ngIf="loginControl.invalid">{{loginError}}</mat-error>
                     </mat-form-field>
                     <mat-form-field class="w-100" appearance="outline">
