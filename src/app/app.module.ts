@@ -9,8 +9,10 @@ import { NavigationModule } from './layouts/navigation/navigation.module';
 import { NavigationComponent } from './layouts/navigation/navigation.component';
 import { BlankComponent } from './layouts/blank/blank.component';
 import { MaterialModule } from './material.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { TokenInterceptor } from './_helpers/token.interceptor';
+import { ErrorInterceptor } from './_helpers/error.interceptors';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,10 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -13,6 +13,19 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   color: $text-color!important;
 }
 
+.success-bg {
+  & > mat-dialog-container {
+    background-color: $accent!important;
+  }
+}
+
+.error-bg {
+  & > mat-dialog-container {
+    background-color: $warn!important;
+    color: white!important;
+  }
+}
+
 .pointer {
   cursor: pointer;
 }
@@ -20,4 +33,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .menu-option {
   font-weight: 400;
   color: $text-color;
+}
+
+.big-icon {
+  font-size: $big-icon-size;
+  width: $big-icon-size!important;
+  height: $big-icon-size!important;
 }
