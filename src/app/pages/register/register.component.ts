@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
-
-// import custom validator to validate that password and confirm password fields match
-import { MustMatch } from './../../../_helpers/must-watch.validator';
+import { MustMatch } from 'src/app/_helpers/must-watch.validator';
 
 @Component({
   selector: 'app-register',

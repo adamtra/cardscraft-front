@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { NavigationRoutingModule } from './navigation-routing.module';
 import { MaterialModule } from 'src/app/material.module';
-import { MainMenuComponent } from '../pages/main-menu/main-menu.component';
+import { MainMenuComponent } from 'src/app/pages/main-menu/main-menu.component';
 
 
 @NgModule({
