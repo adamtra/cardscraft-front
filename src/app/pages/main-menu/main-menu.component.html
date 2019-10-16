@@ -2,6 +2,7 @@
     <div class="row h-100 justify-content-center align-items-center">
         <mat-card class="col-12">
             <mat-card
+                [routerLink]="option.link"
                 (mouseover)="hovered = i"
                 (mouseout)="hovered = -1"
                 [ngStyle]="hovered === i ? hoveredStyle() : normalStyle()"

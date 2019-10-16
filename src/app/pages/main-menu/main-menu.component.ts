@@ -11,13 +11,20 @@ export class MainMenuComponent implements OnInit {
   public hovered: number;
   public menuOptions = [
     {
-      'name': 'Graj',
+      name: 'Graj',
+      link: '/game',
     },
     {
-      'name': 'Zarządzaj taliami',
+      name: 'Zarządzaj taliami',
+      link: '/deck',
     },
     {
-      'name': 'Ustawienia',
+      name: 'Ustawienia',
+      link: '/settings',
+    },
+    {
+      name: 'Panel administracyjny',
+      link: '/admin-panel',
     },
   ];
 

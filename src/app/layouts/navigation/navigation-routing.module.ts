@@ -6,7 +6,19 @@ const routes: Routes = [
   {
     path: '',
     component: MainMenuComponent,
-  }
+  },
+  {
+    path: 'settings',
+    loadChildren: () => import('../../pages/settings/settings.module').then(m => m.SettingsModule),
+  },
+  {
+    path: 'deck',
+    loadChildren: () => import('../../pages/deck/deck.module').then(m => m.DeckModule),
+  },
+  {
+    path: 'admin-panel',
+    loadChildren: () => import('../../pages/admin-panel/admin-panel.module').then(m => m.AdminPanelModule),
+  },
 ];
 
 @NgModule({
