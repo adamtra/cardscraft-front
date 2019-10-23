@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ThemeService } from 'src/app/services/theme.service';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
     selector: 'app-navigation',
@@ -13,9 +14,11 @@ export class NavigationComponent implements OnInit {
 
     constructor(
         private theme: ThemeService,
-        private router: Router) {}
+        private router: Router,
+        private user: UserService) {}
 
     ngOnInit() {
+        this.check();
         const theme = localStorage.getItem('theme') === null ? 'dark-theme' : localStorage.getItem('theme');
         this.lightTheme = theme === 'light-theme';
         this.theme.setTheme(theme);
@@ -29,4 +32,8 @@ export class NavigationComponent implements OnInit {
         localStorage.removeItem('token');
         this.router.navigate(['/login']);
     }
+
+    check() {
+        this.user.check().subscribe();
+    } 
 }
