@@ -2,12 +2,14 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NavigationComponent } from './layouts/navigation/navigation.component';
 import { BlankComponent } from './layouts/blank/blank.component';
+import { AuthGuard } from './_guards/auth.guards';
 
 
 const routes: Routes = [
   {
     path: '',
     component: NavigationComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
