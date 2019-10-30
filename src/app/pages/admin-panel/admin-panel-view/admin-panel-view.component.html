@@ -1,1 +1,10 @@
-<p>admin-panel-view works!</p>
+<mat-card class="h-100">
+    <button mat-raised-button routerLink="/">Powrót</button>
+    <mat-tab-group>
+        <mat-tab label="Karty">
+            <ng-template matTabContent>
+                <app-admin-panel-card-table></app-admin-panel-card-table>
+            </ng-template>
+        </mat-tab>
+    </mat-tab-group>
+</mat-card>

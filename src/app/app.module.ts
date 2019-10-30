@@ -13,6 +13,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { TokenInterceptor } from './_helpers/token.interceptor';
 import { ErrorInterceptor } from './_helpers/error.interceptors';
+import { MatPaginatorIntl } from '@angular/material';
+import { PolishPaginatorIntl } from './PolishPaginationIntl';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { ErrorInterceptor } from './_helpers/error.interceptors';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: MatPaginatorIntl, useValue: PolishPaginatorIntl() },
   ],
   bootstrap: [AppComponent]
 })
