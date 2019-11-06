@@ -10,7 +10,7 @@ export interface Card {
     id: number;
     name: string;
     health: number;
-    damange: number;
+    damage: number;
     manaCost: number;
     img?: Blob;
 }

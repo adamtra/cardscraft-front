@@ -60,3 +60,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   border-top-color: $primary;
   animation: spinner .5s linear infinite;
 }
+
+.mat-table {
+  th {
+    background-color: $primary;
+    color: $text-color!important;
+  }
+}
+
+.w-10 {
+  width: 10%;
+}

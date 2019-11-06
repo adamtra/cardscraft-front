@@ -1,0 +1,32 @@
+<mat-horizontal-stepper labelPosition="bottom" #stepper [linear]="isNew">
+    <mat-step [stepControl]="stepperForm">
+        <ng-template matStepLabel>Parametry</ng-template>
+        <form [formGroup]="paramsForm">
+            <mat-form-field class="w-100">
+                <input matInput placeholder="Nazwa" formControlName="name" required>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+                <input matInput type="number" step="1" placeholder="Obrażenia" formControlName="damage" required>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+                <input matInput type="number" step="1" placeholder="Życie" formControlName="health" required>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+                <input matInput type="number" step="1" placeholder="Koszt" formControlName="manaCost" required>
+            </mat-form-field>
+        </form>
+        <div class="d-flex">
+            <div class="ml-auto">
+                <button mat-raised-button routerLink="/admin-panel">
+                    Powrót
+                </button>
+                <button mat-raised-button color="primary" (click)="save()" [disabled]="isDisabled">
+                    Zapisz
+                </button>
+            </div>
+        </div>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Grafika</ng-template>
+    </mat-step>
+</mat-horizontal-stepper>

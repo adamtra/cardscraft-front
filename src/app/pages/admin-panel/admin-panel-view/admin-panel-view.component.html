@@ -3,6 +3,9 @@
     <mat-tab-group>
         <mat-tab label="Karty">
             <ng-template matTabContent>
+                <div class="d-flex">
+                    <button class="ml-auto" mat-raised-button color="primary" routerLink="card/new">Dodaj</button>
+                </div>
                 <app-admin-panel-card-table></app-admin-panel-card-table>
             </ng-template>
         </mat-tab>

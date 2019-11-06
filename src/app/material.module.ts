@@ -28,6 +28,7 @@ import {
     MatDatepickerModule,
     MAT_DATE_LOCALE,
     MatNativeDateModule,
+    MatStepperModule,
 } from '@angular/material';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 
@@ -60,6 +61,7 @@ const modules = [
     MatRadioModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatStepperModule,
 ];
 
 @NgModule({

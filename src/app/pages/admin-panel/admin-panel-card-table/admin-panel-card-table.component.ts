@@ -14,7 +14,7 @@ export class AdminPanelCardTableComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   
   public dataSource: MatTableDataSource<Card>;
-  public displayedColumns = ['name', 'damage', 'health', 'manaCost'];
+  public displayedColumns = ['icon', 'name', 'damage', 'health', 'manaCost'];
 
   constructor(private card: CardService) { }
 
@@ -28,6 +28,10 @@ export class AdminPanelCardTableComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     })
+  }
+
+  showCard(id: number) {
+
   }
 
 }

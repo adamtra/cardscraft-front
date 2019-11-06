@@ -13,8 +13,16 @@ export class CardService {
 
   constructor(private http: HttpClient) { }
 
+  get(id: number): Observable<Card> {
+    return this.http.get<Card>(`${environment.apiLink}${this.urlBase}/${id}`);
+  }
+
   getAll(): Observable<Card[]> {
     return this.http.get<Card[]>(`${environment.apiLink}${this.urlBase}`);
+  }
+
+  add(data: any): Observable<number> {
+    return this.http.post<number>(`${environment.apiLink}${this.urlBase}`, data);
   }
 
 }

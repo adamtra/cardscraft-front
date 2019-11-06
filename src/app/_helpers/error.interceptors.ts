@@ -34,7 +34,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                     data: 'Serwer nie odpowiada.',
                 });
             }
-            const error = err.error.message || err.statusText;
+            const error = err.error || err.statusText;
             return throwError(error);
         }));
     }
