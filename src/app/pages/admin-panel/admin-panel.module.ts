@@ -7,6 +7,7 @@ import { AdminPanelCardTableComponent } from './admin-panel-card-table/admin-pan
 import { MaterialModule } from 'src/app/material.module';
 import { CardFormComponent } from './card-form/card-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     AdminPanelRoutingModule,
     MaterialModule,
     ReactiveFormsModule,
+    SharedModule,
   ]
 })
 export class AdminPanelModule { }

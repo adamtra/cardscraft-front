@@ -13,6 +13,7 @@ export class AdminPanelCardTableComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   
+  public loading = false;
   public dataSource: MatTableDataSource<Card>;
   public displayedColumns = ['icon', 'name', 'damage', 'health', 'manaCost'];
 
@@ -23,10 +24,12 @@ export class AdminPanelCardTableComponent implements OnInit {
   }
 
   getTable() {
+    this.loading = true;
     this.card.getAll().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      this.loading = false;
     })
   }
 
