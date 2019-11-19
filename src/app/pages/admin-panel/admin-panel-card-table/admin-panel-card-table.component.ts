@@ -37,4 +37,10 @@ export class AdminPanelCardTableComponent implements OnInit {
 
   }
 
+  delete(id: number) {
+    this.card.delete(id).subscribe(() => {
+      this.getTable();
+    });
+  }
+
 }

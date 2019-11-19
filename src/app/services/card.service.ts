@@ -25,4 +25,8 @@ export class CardService {
     return this.http.post<number>(`${environment.apiLink}${this.urlBase}`, data);
   }
 
+  delete(id: number): Observable<string> {
+    return this.http.delete<string>(`${environment.apiLink}${this.urlBase}/${id}`);
+  }
+
 }
