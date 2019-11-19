@@ -21,7 +21,7 @@
                     Powrót
                 </button>
                 <button mat-raised-button color="primary" (click)="save()" [disabled]="isDisabled">
-                    Zapisz
+                    {{isNew ? 'Dodaj' : 'Edytuj'}}
                 </button>
             </div>
         </div>

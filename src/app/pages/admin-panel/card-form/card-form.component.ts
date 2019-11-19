@@ -90,6 +90,13 @@ export class CardFormComponent implements OnInit, OnDestroy {
       }, () => {
         this.saving = false;
       });
+    } else {
+      this.card.edit(this.id, this.paramsForm.value).subscribe(() => {
+        this.saving = false;
+        this.getData();
+      }, () => {
+        this.saving = false;
+      })
     }
   }
 
