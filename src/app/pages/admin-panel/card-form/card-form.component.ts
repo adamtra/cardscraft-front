@@ -17,8 +17,8 @@ export class CardFormComponent implements OnInit, OnDestroy {
   public paramsForm: FormGroup;
   public stepperForm: FormGroup;
   public isNew = true;
+  public id: any;
   
-  private id: any;
   private saving = false;
   private subscriptions = new Subscription();
 
@@ -38,6 +38,7 @@ export class CardFormComponent implements OnInit, OnDestroy {
         this.isNew = true;
         this.newForm();
       } else {
+        this.id = parseInt(this.id, 10);
         this.stepperForm = this.fb.group({
           isNew: [true, Validators.requiredTrue],
         });

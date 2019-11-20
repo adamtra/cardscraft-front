@@ -13,10 +13,15 @@ export class CardImageComponent implements OnChanges {
 
   constructor(private card: CardService) { }
 
+
   getImage() {
-    this.card.getImage(this.id).subscribe((data) => {
-      this.createImageFromBlob(data);
-    });
+    if (typeof this.id === 'number') {
+      this.card.getImage(this.id).subscribe((data) => {
+        if (data.type === 'image/png') {
+          this.createImageFromBlob(data);
+        }
+      });
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {
