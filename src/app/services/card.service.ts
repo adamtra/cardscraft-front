@@ -17,6 +17,11 @@ export class CardService {
     return this.http.get<Card>(`${environment.apiLink}${this.urlBase}/${id}`);
   }
 
+  getImage(id: number): Observable<Blob> {
+    const options = { responseType: 'blob' as 'json' };
+    return this.http.get<any>(`${environment.apiLink}${this.urlBase}/${id}/image`, options);
+  }
+
   getAll(): Observable<Card[]> {
     return this.http.get<Card[]>(`${environment.apiLink}${this.urlBase}`);
   }

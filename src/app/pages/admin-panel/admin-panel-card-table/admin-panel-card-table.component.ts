@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
 import { Card } from 'src/app/interfaces';
 import { CardService } from 'src/app/services/card.service';
+import { CardDialogComponent } from 'src/app/shared/card-dialog/card-dialog.component';
 
 @Component({
   selector: 'app-admin-panel-card-table',
@@ -17,7 +18,9 @@ export class AdminPanelCardTableComponent implements OnInit {
   public dataSource: MatTableDataSource<Card>;
   public displayedColumns = ['icon', 'name', 'damage', 'health', 'manaCost'];
 
-  constructor(private card: CardService) { }
+  constructor(
+    private card: CardService,
+    private dialog: MatDialog) { }
 
   ngOnInit() {
     this.getTable();
@@ -34,7 +37,11 @@ export class AdminPanelCardTableComponent implements OnInit {
   }
 
   showCard(id: number) {
-
+    this.dialog.open(CardDialogComponent, {
+      data: {
+        id
+      },
+    });
   }
 
   delete(id: number) {
