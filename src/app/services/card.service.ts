@@ -22,6 +22,14 @@ export class CardService {
     return this.http.get<any>(`${environment.apiLink}${this.urlBase}/${id}/image`, options);
   }
 
+  setImage(id: number, file: File) {
+    const uploadData = new FormData();
+    if (file !== undefined) {
+      uploadData.append('file', file, file.name);
+    }
+    return this.http.post<number>(`${environment.apiLink}${this.urlBase}/${id}/image`, uploadData);
+  }
+
   getAll(): Observable<Card[]> {
     return this.http.get<Card[]>(`${environment.apiLink}${this.urlBase}`);
   }

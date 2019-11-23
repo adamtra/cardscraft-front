@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CardService } from 'src/app/services/card.service';
+import { CardImageComponent } from 'src/app/shared/card-image/card-image.component';
 
 @Component({
   selector: 'app-card-form',
@@ -13,12 +14,13 @@ import { CardService } from 'src/app/services/card.service';
 export class CardFormComponent implements OnInit, OnDestroy {
 
   @ViewChild('stepper', {static: true}) stepper: MatStepper;
+  @ViewChild('image', { static: true }) image: CardImageComponent;
 
   public paramsForm: FormGroup;
   public stepperForm: FormGroup;
   public isNew = true;
   public id: any;
-  
+
   private saving = false;
   private subscriptions = new Subscription();
 
@@ -47,7 +49,6 @@ export class CardFormComponent implements OnInit, OnDestroy {
         this.getData();
       }
     }));
-    
   }
 
   ngOnDestroy() {
@@ -78,7 +79,7 @@ export class CardFormComponent implements OnInit, OnDestroy {
       this.paramsForm.get('damage').setValue(data.damage);
       this.paramsForm.get('health').setValue(data.health);
       this.paramsForm.get('manaCost').setValue(data.manaCost);
-    })
+    });
   }
 
   save() {
@@ -97,8 +98,15 @@ export class CardFormComponent implements OnInit, OnDestroy {
         this.getData();
       }, () => {
         this.saving = false;
-      })
+      });
     }
+  }
+
+  changeImage(image: File) {
+    this.image.file = null;
+    this.card.setImage(this.id, image).subscribe(() => {
+      this.image.getImage();
+    });
   }
 
   get isDisabled() {

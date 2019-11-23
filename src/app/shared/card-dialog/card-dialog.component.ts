@@ -12,7 +12,6 @@ export class CardDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
-    this.dialogRef.updateSize('600px');
   }
 
 }

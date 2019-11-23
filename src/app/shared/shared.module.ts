@@ -5,6 +5,7 @@ import { MaterialModule } from '../material.module';
 import { UiLoaderComponent } from './ui-loader/ui-loader.component';
 import { CardImageComponent } from './card-image/card-image.component';
 import { CardDialogComponent } from './card-dialog/card-dialog.component';
+import { InputFileComponent } from './input-file/input-file.component';
 
 
 
@@ -14,6 +15,7 @@ import { CardDialogComponent } from './card-dialog/card-dialog.component';
     UiLoaderComponent,
     CardImageComponent,
     CardDialogComponent,
+    InputFileComponent,
   ],
   imports: [
     CommonModule,
@@ -26,6 +28,7 @@ import { CardDialogComponent } from './card-dialog/card-dialog.component';
   exports: [
     UiLoaderComponent,
     CardImageComponent,
+    InputFileComponent,
   ],
 })
 export class SharedModule { }

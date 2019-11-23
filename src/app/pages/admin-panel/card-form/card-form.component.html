@@ -28,8 +28,9 @@
     </mat-step>
     <mat-step>
         <ng-template matStepLabel>Grafika</ng-template>
+        <app-input-file (fileSelected)="changeImage($event)"></app-input-file>
         <div class="d-flex justify-content-center">
-            <app-card-image [id]="id"></app-card-image>
+            <app-card-image #image [id]="id"></app-card-image>
         </div>
     </mat-step>
 </mat-horizontal-stepper>
