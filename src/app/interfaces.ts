@@ -14,3 +14,9 @@ export interface Card {
     manaCost: number;
     img?: Blob;
 }
+
+export interface Deck {
+    id: number;
+    name: string;
+    cards?: Card[];
+}

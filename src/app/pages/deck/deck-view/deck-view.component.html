@@ -1,1 +1,11 @@
-<p>deck-view works!</p>
+<mat-card class="h-100 overflow-auto">
+    <button mat-raised-button routerLink="/">Powrót</button>
+    <mat-tab-group>
+        <mat-tab *ngFor="let deck of decks" [label]="deck.name">
+            <ng-template matTabContent>
+                <app-deck-card-table [id]="deck.id"></app-deck-card-table>
+            </ng-template>
+        </mat-tab>
+    </mat-tab-group>
+</mat-card>
+
