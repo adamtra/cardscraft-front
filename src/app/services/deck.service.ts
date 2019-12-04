@@ -21,4 +21,16 @@ export class DeckService {
     return this.http.get<Card[]>(`${environment.apiLink}${this.urlBase}/${id}/cards`);
   }
 
+  add(data: any): Observable<string> {
+    return this.http.post<string>(`${environment.apiLink}${this.urlBase}`, data);
+  }
+
+  edit(id: number, data: any): Observable<string> {
+    return this.http.put<string>(`${environment.apiLink}${this.urlBase}/${id}`, data);
+  }
+
+  delete(id: number): Observable<string> {
+    return this.http.delete<string>(`${environment.apiLink}${this.urlBase}/${id}`);
+  }
+
 }
