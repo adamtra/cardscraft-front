@@ -88,7 +88,9 @@ export class CardFormComponent implements OnInit, OnDestroy {
       this.card.add(this.paramsForm.value).subscribe((id) => {
         this.saving = false;
         this.router.navigate(['/admin-panel/card/' + id]);
-        this.stepper.next();
+        setTimeout(() => {
+          this.stepper.next();
+        });
       }, () => {
         this.saving = false;
       });
