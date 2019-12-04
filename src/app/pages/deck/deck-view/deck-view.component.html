@@ -1,8 +1,14 @@
 <mat-card class="h-100 overflow-auto">
-    <button mat-raised-button routerLink="/">Powrót</button>
+    <div class="d-flex flex-wrap">
+        <button mat-raised-button routerLink="/">Powrót</button>
+        <button mat-raised-button color="primary" class="ml-auto" (click)="add()">Dodaj</button>
+    </div>
     <mat-tab-group>
         <mat-tab *ngFor="let deck of decks" [label]="deck.name">
             <ng-template matTabContent>
+                <div class="d-flex">
+                    <button mat-raised-button color="primary" class="ml-auto" (click)="edit(deck)">Edytuj</button>
+                </div>
                 <app-deck-card-table [id]="deck.id"></app-deck-card-table>
             </ng-template>
         </mat-tab>

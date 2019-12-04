@@ -1,0 +1,12 @@
+<mat-dialog-content (click)="close()">
+    <form [formGroup]="deckForm">
+        <mat-form-field class="w-100">
+            <input matInput placeholder="Nazwa" formControlName="name" required>
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-raised-button (click)="close()">Zamknij</button>
+    <button mat-raised-button *ngIf="data" (click)="delete()" color="warn">Usuń</button>
+    <button mat-raised-button [disabled]="isDisabled" (click)="save()" color="primary">Zapisz</button>
+</mat-dialog-actions>
