@@ -15,6 +15,7 @@
                             <span>Widok karty</span>
                         </button>
                     </mat-menu>
+                    <mat-checkbox [checked]="element.present" (change)="changeSelection($event, element)"></mat-checkbox>
                 </td>
             </ng-container>
 

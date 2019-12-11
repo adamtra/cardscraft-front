@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, MatDialog, MatCheckboxChange } from '@angular/material';
 import { Card } from 'src/app/interfaces';
 import { DeckService } from 'src/app/services/deck.service';
 import { CardDialogComponent } from 'src/app/shared/card-dialog/card-dialog.component';
@@ -46,5 +46,11 @@ export class DeckCardTableComponent implements OnInit {
     });
   }
 
-
+  changeSelection(ev: MatCheckboxChange, card: Card) {
+    if (ev.checked) {
+      this.deck.addCard(this.id, card.id).subscribe();
+    } else {
+      this.deck.deleteCard(this.id, card.id).subscribe();
+    }
+  }
 }
