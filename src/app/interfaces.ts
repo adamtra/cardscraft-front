@@ -3,7 +3,7 @@ export interface Token {
 }
 
 export interface User {
-    
+    username: string;
 }
 
 export interface Card {

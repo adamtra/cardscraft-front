@@ -15,6 +15,7 @@ import { TokenInterceptor } from './_helpers/token.interceptor';
 import { ErrorInterceptor } from './_helpers/error.interceptors';
 import { MatPaginatorIntl } from '@angular/material';
 import { PolishPaginatorIntl } from './PolishPaginationIntl';
+import { GameModule } from './pages/game/game.module';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { PolishPaginatorIntl } from './PolishPaginationIntl';
     MaterialModule,
     HttpClientModule,
     FormsModule,
+    GameModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

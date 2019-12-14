@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ThemeService } from 'src/app/services/theme.service';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import { SharedStorage } from 'ngx-store';
+import { User } from 'src/app/interfaces';
 
 @Component({
     selector: 'app-navigation',
@@ -9,6 +11,8 @@ import { UserService } from 'src/app/services/user.service';
     styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent implements OnInit {
+
+    @SharedStorage('userData') userData: User = {} as User;
 
     public lightTheme = false;
 
@@ -34,6 +38,8 @@ export class NavigationComponent implements OnInit {
     }
 
     check() {
-        this.user.check().subscribe();
-    } 
+        this.user.check().subscribe((data) => {
+            this.userData = {...data};
+        });
+    }
 }

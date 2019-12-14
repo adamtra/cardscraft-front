@@ -19,6 +19,10 @@ const routes: Routes = [
     path: 'admin-panel',
     loadChildren: () => import('../../pages/admin-panel/admin-panel.module').then(m => m.AdminPanelModule),
   },
+  {
+    path: 'game',
+    loadChildren: () => import('../../pages/game/game.module').then(m => m.GameModule),
+  },
 ];
 
 @NgModule({
