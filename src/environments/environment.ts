@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   apiLink: `http://${window.location.hostname}:8080/api/`,
+  wsLink: `http://${window.location.hostname}:8080/ws/`,
 };
 
 /*
