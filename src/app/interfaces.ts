@@ -3,7 +3,7 @@ export interface Token {
 }
 
 export interface User {
-    
+    username: string;
 }
 
 export interface Card {
@@ -13,6 +13,7 @@ export interface Card {
     damage: number;
     manaCost: number;
     img?: Blob;
+    present?: boolean;
 }
 
 export interface Deck {

@@ -33,4 +33,12 @@ export class DeckService {
     return this.http.delete<string>(`${environment.apiLink}${this.urlBase}/${id}`);
   }
 
+  addCard(id: number, cardId: number): Observable<string> {
+    return this.http.post<string>(`${environment.apiLink}${this.urlBase}/${id}/card/${cardId}`, null);
+  }
+
+  deleteCard(id: number, cardId: number): Observable<string> {
+    return this.http.delete<string>(`${environment.apiLink}${this.urlBase}/${id}/card/${cardId}`);
+  }
+
 }
