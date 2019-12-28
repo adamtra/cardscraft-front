@@ -1,4 +1,4 @@
-<img [src]="file" *ngIf="file !== null; else noImageFound">
+<img [src]="file" *ngIf="file !== null; else noImageFound" [class.h-100]="fill">
 <ng-template #noImageFound>
-    <img src="./assets/images/card-reverse.png">
+    <img src="./assets/images/card-reverse.png" [class.h-100]="fill">
 </ng-template>

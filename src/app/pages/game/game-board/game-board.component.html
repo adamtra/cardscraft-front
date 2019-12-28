@@ -1,0 +1,32 @@
+<div class="board-boundary mx-auto d-flex flex-column justify-content-between">
+    <mat-card class="h-20 m-2">
+        <div class="d-flex h-100">
+            <div class="my-cards d-flex justify-content-center h-100 col-10">
+                <div class="col-2" *ngFor="let card of enemy.cards">
+                    <app-card-image [fill]="true" [id]="false"></app-card-image>
+                </div>
+            </div>
+            <div class="col-2 my-auto">
+                <app-mana-bar [value]="enemy.mana" [max]="manaMax" [showDots]="false"></app-mana-bar>
+            </div>
+        </div>
+    </mat-card>
+    <mat-card class="h-100 m-2">
+        Plansza
+    </mat-card>
+    <mat-card class="h-20 m-2">
+        <div class="d-flex h-100">
+            <div id="my-cards" cdkDropList cdkDropListOrientation="horizontal" class="my-cards d-flex justify-content-center col-8"
+                [cdkDropListData]="me.cards"
+                (cdkDropListDropped)="drop($event)">
+                <div class="col-2" *ngFor="let card of me.cards" cdkDrag>
+                    <app-card-image [fill]="true" [id]="card"></app-card-image>
+                    <app-card-image *cdkDragPreview [id]="card"></app-card-image>
+                </div>
+            </div>
+            <div class="col-4 my-auto">
+                <app-mana-bar [value]="me.mana" [max]="manaMax"></app-mana-bar>
+            </div>
+        </div>
+    </mat-card>
+</div>
