@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { GameBeginComponent } from './game-begin/game-begin.component';
+import { GameManagerComponent } from './game-manager/game-manager.component';
 
 
 const routes: Routes = [
   {
     path: '',
-    component: GameBeginComponent,
+    component: GameManagerComponent,
   },
 ];
 

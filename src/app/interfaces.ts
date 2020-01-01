@@ -21,3 +21,9 @@ export interface Deck {
     name: string;
     cards?: Card[];
 }
+
+export interface PlayerData {
+    cards: number[];
+    health: number;
+    mana: number;
+}

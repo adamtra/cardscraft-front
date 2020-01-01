@@ -9,6 +9,7 @@ import { CardService } from 'src/app/services/card.service';
 export class CardImageComponent implements OnChanges {
 
   @Input() id: number;
+  @Input() fill = false;
   file = null;
 
   constructor(private card: CardService) { }
