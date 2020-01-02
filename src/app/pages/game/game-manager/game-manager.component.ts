@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GameManagerComponent implements OnInit {
 
-  public state = 1;
+  public state = 2;
 
   constructor() { }
 
