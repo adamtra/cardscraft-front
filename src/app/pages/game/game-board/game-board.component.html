@@ -11,23 +11,47 @@
             </div>
         </div>
     </mat-card>
-    <mat-card class="h-100 m-2">
-        <div class="game-area d-flex align-items-center justify-content-center">
-            <div class="col-12 text-center">
-                Enemy cards
+    <mat-card class="h-50 m-2">
+        <div class="d-flex flex-column justify-content-between h-100">
+            <div class="h-50 p-2">
+                <div class="d-flex h-100">
+                    <div class="my-cards d-flex justify-content-center h-100 col-12">
+                        <div class="col-2" *ngFor="let card of enemy.played">
+                            <app-card-image class="card-hover" [fill]="true" [id]="card"></app-card-image>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-12 text-center">
-                My cards
+
+            <div class="h-50 p-2">
+                <div class="d-flex h-100">
+                    <div class="my-cards d-flex justify-content-center h-100 col-12"
+                        cdkDropList
+                        cdkDropListOrientation="horizontal"
+                        #myCards="cdkDropList"
+                        [cdkDropListConnectedTo]="[myHand]"
+                        [cdkDropListData]="me.played"
+                        (cdkDropListDropped)="playCard($event)">
+                        <div class="col-2" *ngFor="let card of me.played">
+                            <app-card-image class="card-hover" [fill]="true" [id]="card"></app-card-image>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </mat-card>
     <mat-card class="h-20 m-2">
         <div class="d-flex h-100">
-            <div id="my-cards" cdkDropList cdkDropListOrientation="horizontal" class="my-cards d-flex justify-content-center col-8"
+            <div id="my-cards"
+                cdkDropList
+                cdkDropListOrientation="horizontal"
+                class="my-cards d-flex justify-content-center col-8"
+                #myHand="cdkDropList"
+                [cdkDropListConnectedTo]="[myCards]"
                 [cdkDropListData]="me.cards"
                 (cdkDropListDropped)="drop($event)">
                 <div class="col-2" *ngFor="let card of me.cards" cdkDrag>
-                    <app-card-image [fill]="true" [id]="card"></app-card-image>
+                    <app-card-image class="card-hover" [fill]="true" [id]="card"></app-card-image>
                     <app-card-image *cdkDragPreview [id]="card"></app-card-image>
                 </div>
             </div>

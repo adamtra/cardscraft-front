@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { PlayerData } from 'src/app/interfaces';
 
 @Component({
@@ -19,17 +19,30 @@ export class GameBoardComponent implements OnInit {
     this.me = {
       cards: [6, 7, 8, 10, 12],
       health: 30,
-      mana: 3
+      mana: 3,
+      played: [],
     };
     this.enemy = {
       cards: [0, 0],
       health: 30,
       mana: 2,
+      played: [6],
     };
   }
 
   drop(event: CdkDragDrop<number[]>) {
     moveItemInArray(this.me.cards, event.previousIndex, event.currentIndex);
+  }
+
+  playCard(event: CdkDragDrop<number[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex);
+    }
   }
 
 }

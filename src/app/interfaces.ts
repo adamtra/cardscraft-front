@@ -26,4 +26,5 @@ export interface PlayerData {
     cards: number[];
     health: number;
     mana: number;
+    played: number[];
 }
