@@ -32,4 +32,8 @@ export class GameManagerComponent implements OnInit {
     });
   }
 
+  newGame() {
+    this.state = 1;
+  }
+
 }
