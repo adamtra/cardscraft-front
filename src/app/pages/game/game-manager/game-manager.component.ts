@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
+import { WebSocketService } from 'src/app/services/web-socket.service';
 
 @Component({
   selector: 'app-game-manager',
@@ -7,11 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GameManagerComponent implements OnInit {
 
-  public state = 2;
+  @HostListener('window:beforeunload')
+  disconnect() {
+    this.socket.send('leave', null);
+  }
+  
+  public state = 1;
 
-  constructor() { }
+  constructor(private socket: WebSocketService) { }
 
   ngOnInit() {
+
   }
 
 }
