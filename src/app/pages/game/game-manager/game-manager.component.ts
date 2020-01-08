@@ -10,6 +10,7 @@ import { SharedStorage } from 'ngx-store';
 export class GameManagerComponent implements OnInit {
 
   @SharedStorage('roomId') roomId: string;
+  @SharedStorage('gameEnd') gameEnd: string;
   
   @HostListener('window:beforeunload')
   disconnect() {
@@ -24,6 +25,10 @@ export class GameManagerComponent implements OnInit {
     this.webSocket.connect();
     this.webSocket.onMessage('start').subscribe(() => {
       this.state = 2;
+    });
+    this.webSocket.onMessage('end').subscribe((data) => {
+      this.gameEnd = data;
+      this.state = 3;
     });
   }
 

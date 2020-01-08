@@ -9,7 +9,7 @@ import { SharedStorage } from 'ngx-store';
 })
 export class GameBeginComponent implements OnInit {
 
-  @SharedStorage('roomId') roomId = '';
+  @SharedStorage('roomId') roomId: string;
 
   public message: any;
 
