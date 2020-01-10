@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WebSocketService } from 'src/app/services/web-socket.service';
+import { SharedStorage } from 'ngx-store';
 
 @Component({
   selector: 'app-game-begin',
@@ -8,12 +9,13 @@ import { WebSocketService } from 'src/app/services/web-socket.service';
 })
 export class GameBeginComponent implements OnInit {
 
+  @SharedStorage('roomId') roomId: string;
+
   public message: any;
 
   constructor(private webSocket: WebSocketService) { }
 
   ngOnInit() {
-    this.webSocket.connect();
     this.connectToRoom();
   }
 
@@ -21,6 +23,7 @@ export class GameBeginComponent implements OnInit {
     this.webSocket.send('join', localStorage.getItem('token'));
     this.webSocket.onMessage('joined').subscribe((data) => {
       this.message = data;
+      this.roomId = data;
     });
   }
 

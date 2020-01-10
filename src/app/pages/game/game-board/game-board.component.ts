@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { PlayerData } from 'src/app/interfaces';
 
@@ -8,6 +8,8 @@ import { PlayerData } from 'src/app/interfaces';
   styleUrls: ['./game-board.component.scss']
 })
 export class GameBoardComponent implements OnInit {
+
+  @Output() leaveGame = new EventEmitter();
 
   public me: PlayerData;
   public enemy: PlayerData;
@@ -28,6 +30,10 @@ export class GameBoardComponent implements OnInit {
       mana: 2,
       played: [6],
     };
+  }
+
+  escape() {
+    this.leaveGame.emit();
   }
 
   drop(event: CdkDragDrop<number[]>) {

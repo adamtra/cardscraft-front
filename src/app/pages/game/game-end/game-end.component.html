@@ -1,0 +1,22 @@
+<mat-card>
+    {{gameEnd}}
+    <div class="d-flex">
+        <div class="col-6">
+            <button
+                (click)="newGame()"
+                mat-raised-button
+                class="w-100"
+                color="primary">
+                Nowa gra
+            </button>
+        </div>
+        <div class="col-6">
+            <button
+                routerLink="/"
+                mat-raised-button
+                class="w-100">
+                Powrót do menu
+            </button>
+        </div>
+    </div>
+</mat-card>
