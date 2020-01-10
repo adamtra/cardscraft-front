@@ -17,7 +17,7 @@ export class GameManagerComponent implements OnInit {
     this.webSocket.send('leave', this.roomId);
   }
   
-  public state = 1;
+  public state = 2;
 
   constructor(private webSocket: WebSocketService) { }
 
