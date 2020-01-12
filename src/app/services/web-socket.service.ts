@@ -16,6 +16,12 @@ export class WebSocketService {
     this.socket = socketIo(environment.wsLink);
   }
 
+  disconnect() {
+    if (this.socket) {
+      this.socket.disconnect();
+    }
+  }
+
   send(method: string, message: any) {
     this.socket.emit(method, message);
   }

@@ -1,13 +1,14 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, OnDestroy } from '@angular/core';
 import { WebSocketService } from 'src/app/services/web-socket.service';
 import { SharedStorage } from 'ngx-store';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-game-manager',
   templateUrl: './game-manager.component.html',
   styleUrls: ['./game-manager.component.scss']
 })
-export class GameManagerComponent implements OnInit {
+export class GameManagerComponent implements OnInit, OnDestroy {
 
   @SharedStorage('roomId') roomId: string;
   @SharedStorage('gameEnd') gameEnd: string;
@@ -19,17 +20,24 @@ export class GameManagerComponent implements OnInit {
   
   public state = 1;
 
+  private subscriptions = new Subscription();
+
   constructor(private webSocket: WebSocketService) { }
 
   ngOnInit() {
     this.webSocket.connect();
-    this.webSocket.onMessage('start').subscribe(() => {
+    this.subscriptions.add(this.webSocket.onMessage('start').subscribe(() => {
       this.state = 2;
-    });
-    this.webSocket.onMessage('end').subscribe((data) => {
+    }));
+    this.subscriptions.add(this.webSocket.onMessage('end').subscribe((data) => {
       this.gameEnd = data;
       this.state = 3;
-    });
+    }));
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
+    this.webSocket.disconnect();
   }
 
   newGame() {
