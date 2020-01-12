@@ -28,7 +28,7 @@ export class MainMenuComponent implements OnInit {
     },
   ];
 
-  private color = '#2196F3';
+  private color = '#7c4c39';
 
   constructor() { }
 

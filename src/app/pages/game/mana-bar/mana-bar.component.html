@@ -1,10 +1,7 @@
 <mat-card>
     <div class="d-flex">
-        <div class="main-info my-auto" [class.col-2]="showDots" [class.col-12]="!showDots">
+        <div class="main-info my-auto">
             {{value}} / {{max}}
-        </div>
-        <div *ngIf="showDots" class="col-10 d-flex flex-nowrap">
-            <div *ngFor="let dot of dots" class="mana-dot mx-1" [class.full-dot]="dot"></div>
         </div>
     </div>
 </mat-card>

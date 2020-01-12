@@ -1,12 +1,14 @@
 <div class="board-boundary mx-auto d-flex flex-column justify-content-between">
+    <div class="circle circle--up"></div>
+    <div class="circle circle--down"></div>
     <mat-card class="h-20 m-2">
-        <div class="d-flex h-100">
-            <div class="my-cards d-flex justify-content-center h-100 col-10">
-                <div class="col-2" *ngFor="let card of enemy.cards">
-                    <app-card-image [fill]="true" [id]="false"></app-card-image>
+        <div class="d-flex h-100  justify-content-center">
+            <div class="my-cards d-flex justify-content-center h-100 col-9">
+                <div class="single-card" *ngFor="let card of enemy.cards">
+                    <app-card-image class="single-card__inner" [fill]="true" [id]="false"></app-card-image>
                 </div>
             </div>
-            <div class="col-2 my-auto">
+            <div class="mana-container mana-container--enemy">
                 <app-mana-bar [value]="enemy.mana" [max]="manaMax" [showDots]="false"></app-mana-bar>
             </div>
         </div>
@@ -16,13 +18,15 @@
             <div class="h-50 p-2">
                 <div class="d-flex h-100">
                     <div class="my-cards d-flex justify-content-center h-100 col-12">
-                        <div class="col-2" *ngFor="let card of enemy.played">
-                            <app-card-image class="card-hover" [fill]="true" [id]="card"></app-card-image>
+                        <div class="single-card" *ngFor="let card of enemy.played">
+                            <app-card-image class="single-card__inner" [fill]="true" [id]="card"></app-card-image>
                         </div>
                     </div>
                 </div>
             </div>
-
+            <div class="game-line">
+                <div class="game-line__inner"></div>
+            </div>
             <div class="h-50 p-2">
                 <div class="d-flex h-100">
                     <div class="my-cards d-flex justify-content-center h-100 col-12"
@@ -32,8 +36,8 @@
                         [cdkDropListConnectedTo]="[myHand]"
                         [cdkDropListData]="me.played"
                         (cdkDropListDropped)="playCard($event)">
-                        <div class="col-2" *ngFor="let card of me.played">
-                            <app-card-image class="card-hover" [fill]="true" [id]="card"></app-card-image>
+                        <div class="single-card" *ngFor="let card of me.played">
+                            <app-card-image class="single-card__inner" [fill]="true" [id]="card"></app-card-image>
                         </div>
                     </div>
                 </div>
@@ -41,22 +45,22 @@
         </div>
     </mat-card>
     <mat-card class="h-20 m-2">
-        <button mat-raised-button color="warn" (click)="escape()">Poddaj grę!</button>
-        <div class="d-flex h-100">
+        <button class="surrender-button" mat-raised-button color="warn" (click)="escape()">Poddaj grę!</button>
+        <div class="d-flex justify-content-center h-100">
             <div id="my-cards"
                 cdkDropList
                 cdkDropListOrientation="horizontal"
-                class="my-cards d-flex justify-content-center col-8"
+                class="my-cards d-flex justify-content-center col-9"
                 #myHand="cdkDropList"
                 [cdkDropListConnectedTo]="[myCards]"
                 [cdkDropListData]="me.cards"
                 (cdkDropListDropped)="drop($event)">
-                <div class="col-2" *ngFor="let card of me.cards" cdkDrag>
-                    <app-card-image class="card-hover" [fill]="true" [id]="card"></app-card-image>
+                <div class="single-card single-card--draggable" *ngFor="let card of me.cards" cdkDrag>
+                    <app-card-image class="single-card__inner" [fill]="true" [id]="card"></app-card-image>
                     <app-card-image *cdkDragPreview [id]="card"></app-card-image>
                 </div>
             </div>
-            <div class="col-4 my-auto">
+            <div class="mana-container">
                 <app-mana-bar [value]="me.mana" [max]="manaMax"></app-mana-bar>
             </div>
         </div>
