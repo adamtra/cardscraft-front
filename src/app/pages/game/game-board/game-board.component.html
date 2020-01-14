@@ -2,6 +2,14 @@
     <div class="circle circle--up"></div>
     <div class="circle circle--down"></div>
     <mat-card class="h-20 m-2">
+        <div class="enemy">
+            <div class="enemy__avatar"></div>
+            <div class="enemy__info">
+                <div class="enemy__info__single">
+                    {{enemy.health}}
+                </div>
+            </div>
+        </div>
         <div class="d-flex h-100  justify-content-center">
             <div class="my-cards d-flex justify-content-center h-100 col-9">
                 <div class="single-card" *ngFor="let card of enemy.cards">
@@ -42,7 +50,7 @@
             <div class="hero__avatar"></div>
             <div class="hero__info">
                 <div class="hero__info__single">
-                    30
+                    {{me.health}}
                 </div>
                 <div class="hero__info__single">
                     <app-mana-bar [value]="me.mana" [max]="manaMax"></app-mana-bar>
