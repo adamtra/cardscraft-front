@@ -22,12 +22,14 @@ export interface Deck {
     cards?: Card[];
 }
 
+export interface PlayedCard {
+    id: number;
+    disabled: boolean;
+}
+
 export interface PlayerData {
     cards: number[];
     health: number;
     mana?: number;
-    played: {
-        id: number;
-        disabled: boolean;
-    }[];
+    played: PlayedCard[];
 }

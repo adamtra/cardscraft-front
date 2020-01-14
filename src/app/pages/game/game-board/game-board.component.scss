@@ -127,6 +127,15 @@
           background-color: darken(rgba($primary, 0.5), 10%);
         }
       }
+      &:nth-child(4){
+        margin-left: -113px;
+        margin-top: -25px;
+        background-color: rgba($accent, 0.5);
+        cursor: pointer;
+        &:hover {
+          background-color: darken(rgba($accent, 0.5), 10%);
+        }
+      }
     }
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, ViewChildren, QueryList } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { PlayerData } from 'src/app/interfaces';
+import { PlayerData, PlayedCard } from 'src/app/interfaces';
 import { GameCardComponent } from '../game-card/game-card.component';
 
 @Component({
@@ -11,12 +11,14 @@ import { GameCardComponent } from '../game-card/game-card.component';
 export class GameBoardComponent implements OnInit {
 
   @ViewChildren('myCard') myCards: QueryList<GameCardComponent>;
+  @ViewChildren('played') myPlayed: QueryList<GameCardComponent>;
 
   @Output() leaveGame = new EventEmitter();
 
   public me: PlayerData;
   public enemy: PlayerData;
   public manaMax = 8;
+  public myTurn = true;
 
   constructor() { }
 
@@ -36,6 +38,10 @@ export class GameBoardComponent implements OnInit {
       played: [{
         id: 6,
         disabled: false,
+      },
+      {
+        id: 12,
+        disabled: false,
       }],
     };
   }
@@ -44,8 +50,14 @@ export class GameBoardComponent implements OnInit {
     this.leaveGame.emit();
   }
 
+  endTurn() {
+    this.myTurn = false;
+  }
+
   drop(event: CdkDragDrop<number[]>) {
-    moveItemInArray(this.me.cards, event.previousIndex, event.currentIndex);
+    if (event.previousContainer === event.container) {
+      moveItemInArray(this.me.cards, event.previousIndex, event.currentIndex);
+    }
   }
 
   playCard(event: CdkDragDrop<number[]>) {
@@ -65,5 +77,17 @@ export class GameBoardComponent implements OnInit {
       }
     }
   }
+
+  attackPlayer(event: CdkDragDrop<PlayedCard[]>) {
+    const prev = event.previousContainer.data[event.previousIndex];
+    const cardData = this.myPlayed.find((item) => item.id === prev.id);
+    cardData.disabled = true;
+    this.enemy.health -= cardData.cardData.damage;
+  }
+
+  attackCard(event: CdkDragDrop<PlayedCard[]>) {
+    console.log(event);
+  }
+
 
 }

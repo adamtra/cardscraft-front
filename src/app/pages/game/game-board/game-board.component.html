@@ -2,7 +2,11 @@
     <div class="circle circle--up"></div>
     <div class="circle circle--down"></div>
     <mat-card class="h-20 m-2">
-        <div class="enemy">
+        <div class="enemy"
+            cdkDropList
+            #enemyPlayer="cdkDropList"
+            [cdkDropListConnectedTo]="[myCards]"
+            (cdkDropListDropped)="attackPlayer($event)">
             <div class="enemy__avatar"></div>
             <div class="enemy__info">
                 <div class="enemy__info__single">
@@ -22,7 +26,11 @@
         <div class="d-flex flex-column justify-content-between h-100">
             <div class="h-50 p-2">
                 <div class="d-flex h-100">
-                    <div class="my-cards d-flex justify-content-center h-100 col-12">
+                    <div class="my-cards d-flex justify-content-center h-100 col-12"
+                        cdkDropList
+                        #enemyHand="cdkDropList"
+                        [cdkDropListConnectedTo]="[myCards]"
+                        (cdkDropListDropped)="attackCard($event)">
                         <div class="single-card" *ngFor="let card of enemy.played">
                             <app-game-card [id]="card.id" [showHealth]="true" [disabled]="card.disabled"></app-game-card>
                         </div>
@@ -34,11 +42,12 @@
             </div>
             <div class="h-50 p-2">
                 <div class="d-flex h-100">
-                    <div class="my-cards d-flex justify-content-center h-100 col-12" cdkDropList
-                        cdkDropListOrientation="horizontal" #myCards="cdkDropList" [cdkDropListConnectedTo]="[myHand]"
+                    <div class="my-cards d-flex justify-content-center h-100 col-12" cdkDropList cdkDropListSortingDisabled
+                        cdkDropListOrientation="horizontal" #myCards="cdkDropList" [cdkDropListConnectedTo]="[myHand,enemyPlayer,enemyHand]"
                         [cdkDropListData]="me.played" (cdkDropListDropped)="playCard($event)">
-                        <div class="single-card" *ngFor="let card of me.played">
-                            <app-game-card [id]="card.id" [showHealth]="true" [disabled]="card.disabled"></app-game-card>
+                        <div class="single-card single-card--draggable" *ngFor="let card of me.played" cdkDrag [cdkDragDisabled]="card.disabled || !myTurn">
+                            <app-game-card #played [id]="card.id" [showHealth]="true" [disabled]="card.disabled"></app-game-card>
+                            <app-card-image *cdkDragPreview [id]="card.id"></app-card-image>
                         </div>
                     </div>
                 </div>
@@ -56,7 +65,10 @@
                     <app-mana-bar [value]="me.mana" [max]="manaMax"></app-mana-bar>
                 </div>
                 <div class="hero__info__single" (click)="escape()">
-                    X
+                    <mat-icon>clear</mat-icon>
+                </div>
+                <div class="hero__info__single" (click)="endTurn()" *ngIf="myTurn">
+                    <mat-icon>arrow_forward</mat-icon>
                 </div>
             </div>
         </div>
@@ -64,7 +76,7 @@
             <div id="my-cards" cdkDropList cdkDropListOrientation="horizontal"
                 class="my-cards d-flex justify-content-center col-9" #myHand="cdkDropList"
                 [cdkDropListConnectedTo]="[myCards]" [cdkDropListData]="me.cards" (cdkDropListDropped)="drop($event)">
-                <div class="single-card single-card--draggable" *ngFor="let card of me.cards" cdkDrag>
+                <div class="single-card single-card--draggable" *ngFor="let card of me.cards" cdkDrag [cdkDragDisabled]="!myTurn">
                     <app-game-card #myCard [id]="card"></app-game-card>
                     <app-card-image *cdkDragPreview [id]="card"></app-card-image>
                 </div>
