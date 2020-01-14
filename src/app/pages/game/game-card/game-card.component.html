@@ -1,0 +1,9 @@
+<app-card-image class="single-card__inner" [fill]="true" [id]="id" [class.card-disabled]="disabled"></app-card-image>
+<ng-container *ngIf="cardData">
+    <span
+        [matBadgeHidden]="!showHealth"
+        [matBadge]="cardData.health - lostHealth"
+        matBadgeOverlap="false"
+        matBadgeColor="warn">
+    </span>
+</ng-container>

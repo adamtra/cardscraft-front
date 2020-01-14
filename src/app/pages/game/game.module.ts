@@ -9,6 +9,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { MaterialModule } from 'src/app/material.module';
 import { ManaBarComponent } from './mana-bar/mana-bar.component';
 import { GameEndComponent } from './game-end/game-end.component';
+import { GameCardComponent } from './game-card/game-card.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { GameEndComponent } from './game-end/game-end.component';
     GameBoardComponent,
     GameManagerComponent,
     ManaBarComponent,
-    GameEndComponent
+    GameEndComponent,
+    GameCardComponent
   ],
   imports: [
     CommonModule,

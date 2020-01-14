@@ -1,6 +1,7 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { Component, OnInit, Output, EventEmitter, ViewChildren, QueryList } from '@angular/core';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { PlayerData } from 'src/app/interfaces';
+import { GameCardComponent } from '../game-card/game-card.component';
 
 @Component({
   selector: 'app-game-board',
@@ -8,6 +9,8 @@ import { PlayerData } from 'src/app/interfaces';
   styleUrls: ['./game-board.component.scss']
 })
 export class GameBoardComponent implements OnInit {
+
+  @ViewChildren('myCard') myCards: QueryList<GameCardComponent>;
 
   @Output() leaveGame = new EventEmitter();
 
@@ -22,13 +25,18 @@ export class GameBoardComponent implements OnInit {
       cards: [6, 7, 8, 10, 12],
       health: 30,
       mana: 3,
-      played: [7],
+      played: [{
+        id: 7,
+        disabled: false,
+      }],
     };
     this.enemy = {
       cards: [0, 0],
       health: 30,
-      mana: 2,
-      played: [6],
+      played: [{
+        id: 6,
+        disabled: false,
+      }],
     };
   }
 
@@ -44,10 +52,17 @@ export class GameBoardComponent implements OnInit {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-      transferArrayItem(event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex);
+      const prev = event.previousContainer.data[event.previousIndex];
+      const cardData = this.myCards.find((item) => item.id === prev);
+      const cost = cardData.cardData.manaCost;
+      if (this.me.mana >= cost) {
+        this.me.mana -= cost;
+        this.me.cards.splice(event.previousIndex, 1);
+        this.me.played.push({
+          id: prev,
+          disabled: true,
+        });
+      }
     }
   }
 

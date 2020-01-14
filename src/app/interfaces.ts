@@ -25,6 +25,9 @@ export interface Deck {
 export interface PlayerData {
     cards: number[];
     health: number;
-    mana: number;
-    played: number[];
+    mana?: number;
+    played: {
+        id: number;
+        disabled: boolean;
+    }[];
 }
