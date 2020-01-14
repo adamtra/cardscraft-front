@@ -26,13 +26,9 @@
             </div>
             <div class="h-50 p-2">
                 <div class="d-flex h-100">
-                    <div class="my-cards d-flex justify-content-center h-100 col-12"
-                        cdkDropList
-                        cdkDropListOrientation="horizontal"
-                        #myCards="cdkDropList"
-                        [cdkDropListConnectedTo]="[myHand]"
-                        [cdkDropListData]="me.played"
-                        (cdkDropListDropped)="playCard($event)">
+                    <div class="my-cards d-flex justify-content-center h-100 col-12" cdkDropList
+                        cdkDropListOrientation="horizontal" #myCards="cdkDropList" [cdkDropListConnectedTo]="[myHand]"
+                        [cdkDropListData]="me.played" (cdkDropListDropped)="playCard($event)">
                         <div class="single-card" *ngFor="let card of me.played">
                             <app-card-image class="single-card__inner" [fill]="true" [id]="card"></app-card-image>
                         </div>
@@ -42,23 +38,28 @@
         </div>
     </mat-card>
     <mat-card class="h-20 m-2">
-        <button class="surrender-button" mat-raised-button color="warn" (click)="escape()">Poddaj grę!</button>
+        <div class="hero">
+            <div class="hero__avatar"></div>
+            <div class="hero__info">
+                <div class="hero__info__single">
+                    30
+                </div>
+                <div class="hero__info__single">
+                    <app-mana-bar [value]="me.mana" [max]="manaMax"></app-mana-bar>
+                </div>
+                <div class="hero__info__single" (click)="escape()">
+                    X
+                </div>
+            </div>
+        </div>
         <div class="d-flex justify-content-center h-100">
-            <div id="my-cards"
-                cdkDropList
-                cdkDropListOrientation="horizontal"
-                class="my-cards d-flex justify-content-center col-9"
-                #myHand="cdkDropList"
-                [cdkDropListConnectedTo]="[myCards]"
-                [cdkDropListData]="me.cards"
-                (cdkDropListDropped)="drop($event)">
+            <div id="my-cards" cdkDropList cdkDropListOrientation="horizontal"
+                class="my-cards d-flex justify-content-center col-9" #myHand="cdkDropList"
+                [cdkDropListConnectedTo]="[myCards]" [cdkDropListData]="me.cards" (cdkDropListDropped)="drop($event)">
                 <div class="single-card single-card--draggable" *ngFor="let card of me.cards" cdkDrag>
                     <app-card-image class="single-card__inner" [fill]="true" [id]="card"></app-card-image>
                     <app-card-image *cdkDragPreview [id]="card"></app-card-image>
                 </div>
-            </div>
-            <div class="mana-container">
-                <app-mana-bar [value]="me.mana" [max]="manaMax"></app-mana-bar>
             </div>
         </div>
     </mat-card>

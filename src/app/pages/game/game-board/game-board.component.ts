@@ -22,7 +22,7 @@ export class GameBoardComponent implements OnInit {
       cards: [6, 7, 8, 10, 12],
       health: 30,
       mana: 3,
-      played: [],
+      played: [7],
     };
     this.enemy = {
       cards: [0, 0],

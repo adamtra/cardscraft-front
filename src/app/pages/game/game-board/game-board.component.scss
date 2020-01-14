@@ -75,19 +75,54 @@
     }
   }
 }
-.mana-container{
-  position: absolute;
-  right: 20px;
-  bottom: 20px;
-  width: 100px;
-  &--enemy{
-    top:20px;
-    bottom: auto;
-  }
-}
 
-.surrender-button{
+.hero {
   position: absolute;
-  left: 20px;
   bottom: 20px;
+  left: 20px;
+  width: 200px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  &__avatar {
+    background-image: url("../../../../assets/images/avatar.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100%;
+    flex: 0 0 150px;
+    border-radius: 50%;
+    box-shadow: 0 0 5px 6px rgba(0, 0, 0, 0.6) inset;
+    border: 3px solid rgba(50, 50, 50, 0.9);
+  }
+  &__info{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-self: stretch;
+    &__single{
+      background-color: rgba(#000, 0.5);
+      height: 50px;
+      width: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      box-shadow: 0 0 5px 6px rgba(0, 0, 0, 0.6) inset;
+      border: 3px solid rgba(50, 50, 50, 0.9);
+      &:first-child{
+        margin-left: -25px;
+        background-color: rgba(red, 0.5);
+      }
+      &:nth-child(2){
+        margin-left: -8px;
+        background-color: rgba(dodgerblue, 0.5);
+      }
+      &:nth-child(3){
+        margin-left: -25px;
+        background-color: rgba($primary, 0.5);
+        cursor: pointer;
+      }
+    }
+  }
 }
