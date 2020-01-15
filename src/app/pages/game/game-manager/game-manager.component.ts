@@ -18,7 +18,7 @@ export class GameManagerComponent implements OnInit, OnDestroy {
     this.webSocket.send('leave', this.roomId);
   }
   
-  public state = 2;
+  public state = 1;
 
   private subscriptions = new Subscription();
 
