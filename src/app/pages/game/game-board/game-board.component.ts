@@ -14,6 +14,7 @@ export class GameBoardComponent implements OnInit {
 
   @ViewChildren('myCard') myCards: QueryList<GameCardComponent>;
   @ViewChildren('played') myPlayed: QueryList<GameCardComponent>;
+  @ViewChildren('enemyPlayed') enemyCards: QueryList<GameCardComponent>;
 
   @SharedStorage('roomId') roomId: string;
 
@@ -72,7 +73,14 @@ export class GameBoardComponent implements OnInit {
       this.enemy.played.push({
         id: data.card,
         disabled: true,
+        lostHealth: 0,
       });
+    });
+  }
+
+  attack() {
+    this.webSocket.onMessage('attack').subscribe((data) => {
+      console.log(data);
     });
   }
 
@@ -108,6 +116,7 @@ export class GameBoardComponent implements OnInit {
         this.me.played.push({
           id: prev,
           disabled: true,
+          lostHealth: 0,
         });
         const msg = {
           room: this.roomId,
@@ -125,8 +134,26 @@ export class GameBoardComponent implements OnInit {
     this.enemy.health -= cardData.cardData.damage;
   }
 
-  attackCard(event: CdkDragDrop<PlayedCard[]>) {
-    console.log(event);
+  attackCard(event: CdkDragDrop<PlayedCard[]>, id: number) {
+    const prev = event.previousContainer.data[event.previousIndex];
+    const cardData = this.myPlayed.find((item) => item.id === prev.id);
+    const myCard = this.me.played.find((card) => card.id === prev.id);
+    const enemyCardData = this.enemyCards.find((item) => item.id === id);
+    const enemyCard = this.enemy.played.find((card) => card.id === id);
+    const msg = {
+      room: this.roomId,
+      attacker: {
+        id: cardData.cardData.id,
+        attack: cardData.cardData.damage,
+        health: cardData.cardData.health - myCard.lostHealth,
+      },
+      defender: {
+        id: enemyCardData.cardData.id,
+        attack: enemyCardData.cardData.damage,
+        health: enemyCardData.cardData.health - enemyCard.lostHealth,
+      },
+    }
+    this.webSocket.send('attack', msg);
   }
 
 

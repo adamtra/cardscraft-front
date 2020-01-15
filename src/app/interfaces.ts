@@ -25,6 +25,7 @@ export interface Deck {
 export interface PlayedCard {
     id: number;
     disabled: boolean;
+    lostHealth: number;
 }
 
 export interface PlayerData {
