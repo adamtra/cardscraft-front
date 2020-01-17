@@ -25,12 +25,17 @@ export class GameBoardComponent implements OnInit, OnDestroy {
   public enemy: PlayerData;
   public manaMax = 0;
   public myTurn = false;
+  public enemyInfo = {
+    id: 0,
+    username: '',
+  };
 
   private subscriptions = new Subscription();
 
   constructor(private webSocket: WebSocketService) { }
 
   ngOnInit() {
+    this.enemyData();
     this.turn();
     this.enemyPlayed();
     this.attack();
@@ -52,8 +57,14 @@ export class GameBoardComponent implements OnInit, OnDestroy {
     this.subscriptions.unsubscribe();
   }
 
+  enemyData() {
+    this.subscriptions.add(this.webSocket.onMessage('enemyData').subscribe((data) => {
+      this.enemyInfo = data;
+    }));
+  }
+
   turn() {
-    this.subscriptions.add(this.webSocket.onMessage('turn').subscribe((data: any) => {
+    this.subscriptions.add(this.webSocket.onMessage('turn').subscribe((data) => {
       this.myTurn = true;
       if (this.manaMax !== 10) {
         this.manaMax += 1;

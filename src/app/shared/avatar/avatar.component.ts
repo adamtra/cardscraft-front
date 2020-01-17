@@ -18,7 +18,7 @@ export class AvatarComponent implements OnChanges {
 
 
   getImage() {
-    if (typeof this.id === 'number') {
+    if (typeof this.id === 'number' && this.id !== 0) {
       this.user.getAvatar(this.id).subscribe((data) => {
         if (data.type === 'image/png') {
           this.createImageFromBlob(data);
