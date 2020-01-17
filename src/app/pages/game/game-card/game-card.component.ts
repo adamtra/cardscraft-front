@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CardService } from 'src/app/services/card.service';
 import { Card } from 'src/app/interfaces';
 
@@ -7,11 +7,11 @@ import { Card } from 'src/app/interfaces';
   templateUrl: './game-card.component.html',
   styleUrls: ['./game-card.component.scss']
 })
-export class GameCardComponent implements OnInit {
+export class GameCardComponent implements OnInit, OnChanges {
 
   @Input() id: number;
   @Input() showHealth = false;
-  @Input() lostHealth = 0;
+  @Input() currentHealth = 0;
   @Input() disabled = false;
 
   public cardData: Card;
@@ -22,6 +22,12 @@ export class GameCardComponent implements OnInit {
     this.card.get(this.id).subscribe((data) => {
       this.cardData = data;
     });
+  }
+
+  ngOnChanges(change: SimpleChanges) {
+    if (change.currentHealth && change.currentHealth.currentValue > 0) {
+      this.cardData.health = this.currentHealth;
+    }
   }
 
 }

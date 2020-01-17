@@ -32,7 +32,13 @@
                             class="single-card"
                             cdkDropList
                             (cdkDropListDropped)="attackCard($event, card.id)">
-                            <app-game-card #enemyPlayed [lostHealth]="card.lostHealth" [id]="card.id" [showHealth]="true" [disabled]="card.disabled"></app-game-card>
+                            <app-game-card
+                                #enemyPlayed
+                                [currentHealth]="card.health"
+                                [id]="card.id"
+                                [showHealth]="true"
+                                [disabled]="card.disabled">
+                            </app-game-card>
                         </div>
                     </div>
                 </div>
@@ -45,7 +51,10 @@
                     <div class="my-cards d-flex justify-content-center h-100 col-12" cdkDropList cdkDropListSortingDisabled
                         cdkDropListOrientation="horizontal" #myCards="cdkDropList" [cdkDropListConnectedTo]="[myHand,enemyPlayer]"
                         [cdkDropListData]="me.played" (cdkDropListDropped)="playCard($event)">
-                        <div class="single-card single-card--draggable" *ngFor="let card of me.played" cdkDrag [cdkDragDisabled]="card.disabled || !myTurn">
+                        <div class="single-card single-card--draggable"
+                            *ngFor="let card of me.played"
+                            cdkDrag
+                            [cdkDragDisabled]="card.disabled || !myTurn">
                             <app-game-card #played [id]="card.id" [showHealth]="true" [disabled]="card.disabled"></app-game-card>
                             <app-card-image *cdkDragPreview [id]="card.id"></app-card-image>
                         </div>

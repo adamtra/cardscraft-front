@@ -2,7 +2,7 @@
 <ng-container *ngIf="cardData">
     <span
         [matBadgeHidden]="!showHealth"
-        [matBadge]="cardData.health - lostHealth"
+        [matBadge]="cardData.health"
         matBadgeOverlap="false"
         matBadgeColor="warn">
     </span>
