@@ -66,7 +66,7 @@ export class GameBoardComponent implements OnInit, OnDestroy {
   turn() {
     this.subscriptions.add(this.webSocket.onMessage('turn').subscribe((data) => {
       this.myTurn = true;
-      if (this.manaMax !== 10) {
+      if (this.manaMax !== 9) {
         this.manaMax += 1;
       }
       this.me.mana = this.manaMax;
