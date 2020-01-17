@@ -65,7 +65,7 @@
     </mat-card>
     <mat-card class="h-20 m-2">
         <div class="hero">
-            <div class="hero__avatar"></div>
+            <app-avatar class="hero__avatar" [inGame]="true" [id]="null"></app-avatar>
             <div class="hero__info">
                 <div class="hero__info__single">
                     {{me.health}}

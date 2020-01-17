@@ -25,4 +25,22 @@ export class UserService {
     return this.http.get<User>(`${environment.apiLink}${this.urlBase}/check`);
   }
 
+  getMyAvatar(): Observable<Blob> {
+    const options = { responseType: 'blob' as 'json' };
+    return this.http.get<Blob>(`${environment.apiLink}${this.urlBase}/avatar`, options);
+  }
+
+  getAvatar(id: number): Observable<Blob> {
+    const options = { responseType: 'blob' as 'json' };
+    return this.http.get<Blob>(`${environment.apiLink}${this.urlBase}/${id}/avatar`, options);
+  }
+
+  setAvatar(file: File) {
+    const uploadData = new FormData();
+    if (file !== undefined) {
+      uploadData.append('file', file, file.name);
+    }
+    return this.http.post<number>(`${environment.apiLink}${this.urlBase}/avatar`, uploadData);
+  }
+
 }

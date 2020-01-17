@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { AvatarComponent } from 'src/app/shared/avatar/avatar.component';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-setting-view',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingViewComponent implements OnInit {
 
-  constructor() { }
+  @ViewChild('image', { static: true }) image: AvatarComponent;
+
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
+  }
+
+  changeImage(image: File) {
+    this.image.file = null;
+    this.userService.setAvatar(image).subscribe(() => {
+      this.image.getImage();
+    });
   }
 
 }
