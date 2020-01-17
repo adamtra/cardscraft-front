@@ -12,21 +12,24 @@ export class GameManagerComponent implements OnInit, OnDestroy {
 
   @SharedStorage('roomId') roomId: string;
   @SharedStorage('gameEnd') gameEnd: string;
-  
-  @HostListener('window:beforeunload')
-  disconnect() {
-    this.webSocket.send('leave', this.roomId);
-  }
-  
+
   public state = 1;
 
   private subscriptions = new Subscription();
 
+  @HostListener('window:beforeunload')
+  disconnect() {
+    this.webSocket.send('leave', this.roomId);
+  }
+
   constructor(private webSocket: WebSocketService) { }
+
+
 
   ngOnInit() {
     this.webSocket.connect();
-    this.subscriptions.add(this.webSocket.onMessage('start').subscribe(() => {
+    this.subscriptions.add(this.webSocket.onMessage('start').subscribe((data) => {
+      this.roomId = data;
       this.state = 2;
     }));
     this.subscriptions.add(this.webSocket.onMessage('end').subscribe((data) => {
