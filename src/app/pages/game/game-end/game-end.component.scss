@@ -1,0 +1,29 @@
+.mat-card {
+  background: transparent !important;
+  width: 100%;
+  flex: 0 0 70px;
+}
+
+.game-end {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  &__inner {
+    width: 100%;
+    flex: 0 0 calc(100% - 70px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    h3 {
+      color: rgba(255, 255, 255, 0.05);
+      font-size: 90px;
+      text-transform: uppercase;
+      color: lighten(#303030, 4%);
+      text-shadow: 1px 1px 10px #222;
+    }
+  }
+}

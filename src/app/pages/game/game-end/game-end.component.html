@@ -1,22 +1,27 @@
-<mat-card>
-    {{gameEnd}}
-    <div class="d-flex">
-        <div class="col-6">
-            <button
-                (click)="newGame()"
-                mat-raised-button
-                class="w-100"
-                color="primary">
-                Nowa gra
-            </button>
-        </div>
-        <div class="col-6">
-            <button
-                routerLink="/"
-                mat-raised-button
-                class="w-100">
-                Powrót do menu
-            </button>
-        </div>
+<div class="game-end">
+    <div class="game-end__inner">
+        <h3>Game Over</h3>
     </div>
-</mat-card>
+    <mat-card>
+        {{gameEnd}}
+        <div class="d-flex">
+            <div class="col-6">
+                <button
+                    (click)="newGame()"
+                    mat-raised-button
+                    class="w-100"
+                    color="primary">
+                    Nowa gra
+                </button>
+            </div>
+            <div class="col-6">
+                <button
+                    routerLink="/"
+                    mat-raised-button
+                    class="w-100">
+                    Powrót do menu
+                </button>
+            </div>
+        </div>
+    </mat-card>
+</div>
