@@ -148,4 +148,19 @@
 .enemy {
   top: 20px;
   @include player-avatar();
+  &__name {
+    display: flex;
+    flex-wrap: wrap;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    align-self: stretch;
+    color: white;
+    cursor: default;
+    position: absolute;
+    width: 150px;
+    margin-top: 150px;
+    text-align: center;
+    font-size: 1.5rem;
+  }
 }

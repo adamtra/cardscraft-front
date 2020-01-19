@@ -1,16 +1,17 @@
-import { Component, OnInit, Output, EventEmitter, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChildren, QueryList, OnDestroy } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { PlayerData, PlayedCard } from 'src/app/interfaces';
 import { GameCardComponent } from '../game-card/game-card.component';
 import { SharedStorage } from 'ngx-store';
 import { WebSocketService } from 'src/app/services/web-socket.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-game-board',
   templateUrl: './game-board.component.html',
   styleUrls: ['./game-board.component.scss']
 })
-export class GameBoardComponent implements OnInit {
+export class GameBoardComponent implements OnInit, OnDestroy {
 
   @ViewChildren('myCard') myCards: QueryList<GameCardComponent>;
   @ViewChildren('played') myPlayed: QueryList<GameCardComponent>;
@@ -24,12 +25,21 @@ export class GameBoardComponent implements OnInit {
   public enemy: PlayerData;
   public manaMax = 0;
   public myTurn = false;
+  public enemyInfo = {
+    id: 0,
+    username: '',
+  };
+
+  private subscriptions = new Subscription();
 
   constructor(private webSocket: WebSocketService) { }
 
   ngOnInit() {
+    this.enemyData();
     this.turn();
     this.enemyPlayed();
+    this.attack();
+    this.playerAttacked();
     this.me = {
       cards: [],
       health: 30,
@@ -43,10 +53,20 @@ export class GameBoardComponent implements OnInit {
     };
   }
 
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
+  }
+
+  enemyData() {
+    this.subscriptions.add(this.webSocket.onMessage('enemyData').subscribe((data) => {
+      this.enemyInfo = data;
+    }));
+  }
+
   turn() {
-    this.webSocket.onMessage('turn').subscribe((data: any) => {
+    this.subscriptions.add(this.webSocket.onMessage('turn').subscribe((data) => {
       this.myTurn = true;
-      if (this.manaMax !== 10) {
+      if (this.manaMax !== 9) {
         this.manaMax += 1;
       }
       this.me.mana = this.manaMax;
@@ -65,23 +85,59 @@ export class GameBoardComponent implements OnInit {
       this.enemy.played.forEach((card) => {
         card.disabled = false;
       });
-    });
+    }));
   }
 
   enemyPlayed() {
-    this.webSocket.onMessage('putOnBoard').subscribe((data) => {
+    this.subscriptions.add(this.webSocket.onMessage('putOnBoard').subscribe((data) => {
       this.enemy.played.push({
         id: data.card,
         disabled: true,
-        lostHealth: 0,
+        health: 0,
       });
-    });
+    }));
   }
 
   attack() {
-    this.webSocket.onMessage('attack').subscribe((data) => {
-      console.log(data);
-    });
+    this.subscriptions.add(this.webSocket.onMessage('attack').subscribe((data) => {
+      const {attacker, defender} = data;
+      if (this.myTurn) {
+        if (attacker.health <= 0) {
+          this.me.played = this.me.played.filter((card) => card.id !== attacker.id);
+        } else {
+          const cardData = this.me.played.find((item) => item.id === attacker.id);
+          cardData.health = attacker.health;
+        }
+        if (defender.health <= 0) {
+          this.enemy.played = this.enemy.played.filter((card) => card.id !== defender.id);
+        } else {
+          const cardData = this.enemy.played.find((item) => item.id === defender.id);
+          cardData.health = defender.health;
+        }
+      } else {
+        if (attacker.health <= 0) {
+          this.enemy.played = this.enemy.played.filter((card) => card.id !== attacker.id);
+        } else {
+          const cardData = this.enemy.played.find((item) => item.id === attacker.id);
+          cardData.health = attacker.health;
+        }
+        if (defender.health <= 0) {
+          this.me.played = this.me.played.filter((card) => card.id !== defender.id);
+        } else {
+          const cardData = this.me.played.find((item) => item.id === defender.id);
+          cardData.health = defender.health;
+        }
+      }
+    }));
+  }
+
+  playerAttacked() {
+    this.subscriptions.add(this.webSocket.onMessage('playerAttacked').subscribe((data) => {
+      if (this.me.health <= data) {
+        this.escape();
+      }
+      this.me.health -= data;
+    }));
   }
 
   escape() {
@@ -116,7 +172,7 @@ export class GameBoardComponent implements OnInit {
         this.me.played.push({
           id: prev,
           disabled: true,
-          lostHealth: 0,
+          health: 0,
         });
         const msg = {
           room: this.roomId,
@@ -130,8 +186,14 @@ export class GameBoardComponent implements OnInit {
   attackPlayer(event: CdkDragDrop<PlayedCard[]>) {
     const prev = event.previousContainer.data[event.previousIndex];
     const cardData = this.myPlayed.find((item) => item.id === prev.id);
-    cardData.disabled = true;
+    const myCard = this.me.played.find((item) => item.id === prev.id);
+    myCard.disabled = true;
     this.enemy.health -= cardData.cardData.damage;
+    const msg = {
+      room: this.roomId,
+      attack: cardData.cardData.damage,
+    };
+    this.webSocket.send('attackPlayer', msg);
   }
 
   attackCard(event: CdkDragDrop<PlayedCard[]>, id: number) {
@@ -139,20 +201,20 @@ export class GameBoardComponent implements OnInit {
     const cardData = this.myPlayed.find((item) => item.id === prev.id);
     const myCard = this.me.played.find((card) => card.id === prev.id);
     const enemyCardData = this.enemyCards.find((item) => item.id === id);
-    const enemyCard = this.enemy.played.find((card) => card.id === id);
+    myCard.disabled = true;
     const msg = {
       room: this.roomId,
       attacker: {
         id: cardData.cardData.id,
         attack: cardData.cardData.damage,
-        health: cardData.cardData.health - myCard.lostHealth,
+        health: cardData.cardData.health,
       },
       defender: {
         id: enemyCardData.cardData.id,
         attack: enemyCardData.cardData.damage,
-        health: enemyCardData.cardData.health - enemyCard.lostHealth,
+        health: enemyCardData.cardData.health,
       },
-    }
+    };
     this.webSocket.send('attack', msg);
   }
 
