@@ -1,4 +1,4 @@
-<ng-container *ngIf="!inGame; else divContainer">
+<ng-container *ngIf="!inGame">
     <img [src]="file" *ngIf="file !== null; else noImageFound">
     <ng-template #noImageFound>
         <img src="./assets/images/avatar.png">
