@@ -1,9 +1,8 @@
 <div class="game-end">
     <div class="game-end__inner">
-        <h3>Game Over</h3>
+        <h3>{{gameEnd === 'win' ? 'Wygrana' : 'Porażka'}}</h3>
     </div>
     <mat-card>
-        {{gameEnd}}
         <div class="d-flex">
             <div class="col-6">
                 <button
