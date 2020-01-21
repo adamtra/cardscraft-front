@@ -56,7 +56,7 @@
                             *ngFor="let card of me.played"
                             cdkDrag
                             [cdkDragDisabled]="card.disabled || !myTurn">
-                            <app-game-card #played [id]="card.id" [showHealth]="true" [disabled]="card.disabled"></app-game-card>
+                            <app-game-card #played [currentHealth]="card.health" [id]="card.id" [showHealth]="true" [disabled]="card.disabled"></app-game-card>
                             <app-card-image *cdkDragPreview [id]="card.id"></app-card-image>
                         </div>
                     </div>

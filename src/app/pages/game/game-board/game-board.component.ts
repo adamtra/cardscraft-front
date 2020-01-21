@@ -70,14 +70,16 @@ export class GameBoardComponent implements OnInit, OnDestroy {
         this.manaMax += 1;
       }
       this.me.mana = this.manaMax;
-      let newCards: any[];
+      let newCards: any;
       if (data.hasOwnProperty('newCards')) {
         newCards = data.newCards;
       } else {
         newCards = data;
       }
-      for (const card of newCards) {
-        this.me.cards.push(card);
+      if (newCards !== false) {
+        for (const card of newCards) {
+          this.me.cards.push(card);
+        }
       }
       this.me.played.forEach((card) => {
         card.disabled = false;
